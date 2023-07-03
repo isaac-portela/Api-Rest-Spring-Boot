@@ -27,6 +27,7 @@ public class SecurityConfigurations {
                 //permite acesso ao /login, mas any(qualquer) outra requisicao precisa de autenticacao
                 .authorizeHttpRequests(authz -> {
                     authz.requestMatchers(HttpMethod.POST, "/login").permitAll();
+                    authz.requestMatchers("/v3/api-docs/**", "swagger-ui.html", "/swagger-ui/**").permitAll();
                     authz.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
